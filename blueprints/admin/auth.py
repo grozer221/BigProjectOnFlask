@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template
 
-from app import User
+from models.models import User
 
 auth = Blueprint('auth', __name__, url_prefix="/admin/auth")
 
