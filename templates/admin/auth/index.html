@@ -1,0 +1,15 @@
+{% extends 'admin/layout.html' %}
+
+{% block content %}
+    <h1>Index auth</h1>
+    <table>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.firstName }}</td>
+                <td>{{ user.lastName }}</td>
+                <td>{{ user.email }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
