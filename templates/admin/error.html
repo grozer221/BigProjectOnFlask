@@ -1,5 +1,11 @@
 {% extends 'admin/layout.html' %}
 
 {% block content %}
-    <h1>Error!!!</h1>
+    {% if errorCode == 404 %}
+        <h1 class="mt-4">Помилка 404. Сторінка не знайдена</h1>
+    {% elif errorCode == 500 %}
+        <h1 class="mt-4">Помилка 500. Server dead</h1>
+    {% else %}
+        <h1 class="mt-4">Помилка.</h1>
+    {% endif %}
 {% endblock %}

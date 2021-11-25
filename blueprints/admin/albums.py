@@ -1,14 +1,10 @@
-from app import db
 from flask import Blueprint, render_template, request, redirect
 
+from app import db
 from models.models import Album
 
 albums = Blueprint('albums', __name__, url_prefix="/admin/albums")
 
-
-# @albums.route('/')
-# def index():
-#     return render_template('admin/albums/index.html')
 
 # all albums on one page
 @albums.route('/')
@@ -40,7 +36,6 @@ def details(id):
     return render_template("admin/albums/details.html", album=album)
 
 
-
 @albums.route('/<int:id>/del')
 def posts_del(id):
     album = Album.query.get_or_404(id)
@@ -67,4 +62,3 @@ def post_update(id):
             return "при зміні альбому відбулась помилка"
     else:
         return render_template("admin/albums/update.html", album=album)
-

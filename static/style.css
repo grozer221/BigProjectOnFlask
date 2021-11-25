@@ -4,13 +4,54 @@
     box-sizing: border-box;
 }
 
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.wrapper > .container {
+    flex-grow: 1;
+}
+
 .container {
     width: 70%;
-    border: 1px solid black;
     margin: 0 auto;
+    position: relative;
+}
+
+.content {
+
 }
 
 .nav {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.block {
+    display: flex;
     gap: 10px;
+}
+
+footer {
+    padding: 10px 0;
+}
+
+
+form .btn {
+    width: 100%;
+}
+
+.loginForm h1, .registerForm h1, .resetPasswordForm h1, .resetTokenForm h1 {
+    text-align: center;
+}
+
+.loginForm, .registerForm, .resetPasswordForm, .resetTokenForm {
+    width: 500px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
