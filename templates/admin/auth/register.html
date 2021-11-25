@@ -2,9 +2,12 @@
 
 {% block content %}
     <div class="registerForm">
-        <h1>Register</h1>
+        <h1>Реєстрація</h1>
         <form action="" method="post">
             {{ form.hidden_tag() }}
+            {% if commonError %}
+                <div class="form-group alert alert-danger">{{ commonError }}</div>
+            {% endif %}
             <div class="form-group">
                 {{ form.email.label(class="form-control-label") }}
                 {{ form.email(class="form-control") }}
@@ -21,15 +24,14 @@
                 {{ form.password.label(class="form-control-label") }}
                 {{ form.password(class="form-control") }}
             </div>
-            <div class="mt-3">
-                {{ form.submit(class="btn btn-outline-info") }}
+            <div class="mt-3 mb-3">
+                {{ form.submit(class="btn btn-outline-dark") }}
             </div>
         </form>
-        <div class="border-top pt-3">
+        <div class="border-top pt-2">
             <small class="text-muted">
                 Вже зареєстровані? <a class="ml-2" href="/admin/auth/login">Увійти</a>
             </small>
         </div>
     </div>
-
 {% endblock %}

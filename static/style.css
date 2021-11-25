@@ -44,11 +44,11 @@ form .btn {
     width: 100%;
 }
 
-.loginForm h1 {
+.loginForm h1, .registerForm h1, .resetPasswordForm h1, .resetTokenForm h1 {
     text-align: center;
 }
 
-.loginForm, .registerForm {
+.loginForm, .registerForm, .resetPasswordForm, .resetTokenForm {
     width: 500px;
     position: absolute;
     top: 50%;

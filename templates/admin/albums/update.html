@@ -1,0 +1,16 @@
+
+{% extends 'admin/layout.html' %}
+
+
+{% block content %}
+<h1>Додавання альбому</h1>
+<form method="post">
+    <label for="name"></label><input type="text" name="name" id="name" value="{{ album.name }}"><br>
+    <label for="description"></label><textarea name="description" id="description" >{{ album.description }}</textarea><br>
+    <label for="src"></label><textarea name="src" id="src">{{ album.src }}</textarea><br>
+{#    <label for="date"></label><input type="date" name="date" id="date" ><br>#}
+    <input type="submit" value="Оновити">
+
+</form>
+{% endblock %}
+
