@@ -10,7 +10,7 @@ db = SQLAlchemy(app)
 
 
 
-db.create_all()
+# db.create_all()
 
 from blueprints.admin.albums import albums
 from blueprints.admin.songs import songs
