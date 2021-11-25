@@ -1,30 +1,15 @@
 from flask import Flask, render_template
+from flask_bcrypt import Bcrypt
+from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = '34qu3qpibc4uit3q4u9gqesdkngfmi9w4hq'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.sqlite3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
-
-
-class User(db.Model):
-    __tablename__ = 'users'
-    id = db.Column(db.Integer, primary_key=True)
-    firstName = db.Column(db.String(120))
-    lastName = db.Column(db.String(120))
-    email = db.Column(db.String(120), unique=True)
-    password = db.Column(db.String(120))
-
-
-class Album(db.Model):
-    __tablename__ = 'albums'
-    id = db.Column(db.Integer, primary_key=True)
-
-
-class Song(db.Model):
-    __tablename__ = 'songs'
-    id = db.Column(db.Integer, primary_key=True)
-
+bcrypt = Bcrypt(app)
+loginManager = LoginManager(app)
 
 db.create_all()
 
