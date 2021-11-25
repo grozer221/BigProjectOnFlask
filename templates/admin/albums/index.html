@@ -1,5 +1,27 @@
+{#всі альбоми#}
+{#список альбомів#}
+
 {% extends 'admin/layout.html' %}
 
 {% block content %}
-    <h1>Index albums</h1>
+
+
+    <a href="create-album">Додати альбом</a>
+{#<h1>Усі альбоми на сайті</h1>#}
+
+    {% if album|length > 0%}
+
+        {%for el in album%}
+        <div>
+            <img src="{{ el.src }}" alt="{{el.name}}">
+
+            <h2>{{el.name}}</h2>
+            <a href="/admin/albums/{{  el.id }}">Детальніше</a>
+        </div>
+        {%endfor%}
+    {% else %}
+    <p>Ще немає статтей на сайті</p>
+    {% endif %}
+
+
 {% endblock %}

@@ -1,0 +1,24 @@
+
+{% extends 'admin/layout.html' %}
+
+
+{% block content %}
+
+{#<h1>{{  article.title }}</h1>#}
+<div>
+    <img src="{{ album.src }}" alt="{{album.name}}"><br>
+
+
+    <h2>{{album.name}}</h2>
+    <p>{{album.description}}</p>
+    <p><b>Дата:{{album.date.date() }}</b></p>
+    <a href="/admin/albums/{{  album.id }}/del">Видалити</a>
+    <a href="/admin/albums/{{  album.id }}/update">Редагувати</a>
+
+
+</div>
+
+
+
+{% endblock %}
+

@@ -1,3 +1,4 @@
+from datetime import datetime
 from app import db
 
 
@@ -13,6 +14,10 @@ class User(db.Model):
 class Album(db.Model):
     __tablename__ = 'albums'
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.Text, nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    src = db.Column(db.Text, nullable=False)
+    date = db.Column(db.DateTime, default=datetime.utcnow)
 
 
 class Song(db.Model):
