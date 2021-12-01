@@ -46,7 +46,7 @@ class Album(db.Model):
     name = db.Column(db.Text, nullable=False)
     description = db.Column(db.Text, nullable=False)
     src = db.Column(db.Text, nullable=False)
-    date = db.Column(db.DateTime, default=datetime.utcnow)
+    date = db.Column(db.Text, nullable=False)
 
 
 class Song(db.Model):

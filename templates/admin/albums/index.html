@@ -13,7 +13,8 @@
 
         {%for el in album%}
         <div>
-            <img src="{{ el.src }}" alt="{{el.name}}">
+            <img src="/static/uploads/{{ el.src }}" alt="{{el.name}}">
+
 
             <h2>{{el.name}}</h2>
             <a href="/admin/albums/{{  el.id }}">Детальніше</a>
@@ -22,6 +23,5 @@
     {% else %}
     <p>Ще немає статтей на сайті</p>
     {% endif %}
-
 
 {% endblock %}
