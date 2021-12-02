@@ -4,10 +4,14 @@
 
 {% block content %}
 <h1>Додавання альбому</h1>
-<form method="post">
+<form  enctype="multipart/form-data" method="post">
     <label for="name"></label><input type="text" name="name" id="name" value="{{ album.name }}"><br>
     <label for="description"></label><textarea name="description" id="description" >{{ album.description }}</textarea><br>
-    <label for="src"></label><textarea name="src" id="src">{{ album.src }}</textarea><br>
+    <label for="date"></label><input type="text" name="date" id="date"  value="{{ album.date }}"><br>
+
+    <img src="/static/uploads/{{ album.src }}" alt="{{ album.name }}"><br>
+    <label for="photo"></label><input type="file" name="photo" id="photo" multiple accept="image/*,image/jpeg"><br>
+
 {#    <label for="date"></label><input type="date" name="date" id="date" ><br>#}
     <input type="submit" value="Оновити">
 

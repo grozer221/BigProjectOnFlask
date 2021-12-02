@@ -4,11 +4,11 @@
 
 {% block content %}
 <h1>Додавання альбому</h1>
-<form method="post">
+<form enctype="multipart/form-data" method="post">
     <label for="name"></label><input type="text" name="name" id="name" ><br>
     <label for="description"></label><textarea name="description" id="description"></textarea><br>
-    <label for="src"></label><textarea name="src" id="src"></textarea><br>
-{#    <label for="date"></label><input type="date" name="date" id="date" ><br>#}
+    <label for="date"></label><input type="number" name="date" id="date" ><br>
+    <input name="file" type="file" class="form-control" id="file">
     <input type="submit" value="Відправити">
 
 </form>
