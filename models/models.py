@@ -52,3 +52,5 @@ class Album(db.Model):
 class Song(db.Model):
     __tablename__ = 'songs'
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.Text, nullable=False)
+    url = db.Column(db.Text, nullable=False)

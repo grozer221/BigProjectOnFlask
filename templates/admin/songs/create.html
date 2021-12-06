@@ -1,0 +1,19 @@
+{% extends 'admin/layout.html' %}
+
+
+{% block content %}
+    <h1>Додавання пісні</h1>
+    <div>
+        <form enctype="multipart/form-data" method="post">
+            <div class="mb-3">
+                <label for="nameSong" class="form-label">Назва пісні</label>
+                <input type="text" id="nameSong" class="form-control" placeholder="Вітер Вадіма " name="nameSong">
+            </div>
+            <div class="mb-3">
+                <label for="fileMusic" class="form-label"> Додайте файл</label>
+                <input class="form-control" type="file" id="fileMusic" name="fileMusic">
+            </div>
+            <input class="btn btn-outline-dark" id="submit" name="submit" type="submit" value="Відправити">
+        </form>
+    </div>
+{% endblock %}
