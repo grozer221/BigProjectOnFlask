@@ -1,5 +1,43 @@
+{#Пісні#}
 {% extends 'admin/layout.html' %}
 
 {% block content %}
-    <h1>Index songs</h1>
+        {% if song|length > 0%}
+        <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/music.css') }}">
+        <script type="text/javascript" src="{{ url_for('static', filename='JavaScripts/music.js') }}" async></script>
+        <div class="wrp">
+            <div class="player">
+                <div class="play-pause" id="-1">▶</div>
+                <div class="nameSong">Name Song</div>
+                <div class="settings">
+                    <div class="npButton" id="prev" data-id="-1">◀</div>
+                    <div class="npButton" id="next" data-id="-1">▶</div>
+                    <div class="mute">🔈</div>
+                    <input type="range" class="volume" min="0" max="100" value="20">
+                </div>
+                <div class="bar">
+                    <div class="setTime"></div>
+                    <div class="range">
+                        <div class="progressSong"></div>
+                        <div class="load"></div>
+                    </div>
+                </div>
+                <div class="time">0:00</div>
+            </div>
+           {% for sn in song %}
+                <div class="song" id="">
+                <div class="play-pauseSn">▶</div>
+                <div class="nameSongSn">{{ sn.name }}  <audio >
+                    <source src="/static/uploads/music/{{ sn.url }}">
+                </audio></div>
+                <div class="nameAlbum">Album</div>
+                <div class="durationSong">0:00</div>
+                <!-- Album -->
+            </div>
+           {% endfor %}
+        </div>
+        {% else %}
+        <p>Пісні відсутні (не створені альбоми або не додано пісень до певного альбому)</p>
+        {% endif %}
+        <a href="create">Додати пісню</a>
 {% endblock %}
