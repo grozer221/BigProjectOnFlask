@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, flash, url_for
 
 from app import db, app
-from models.models import Album
+from models.models import Album, Song
 
 albums = Blueprint('albums', __name__, url_prefix="/admin/albums")
 

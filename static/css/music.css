@@ -1,7 +1,8 @@
-.range, .play-pause, .song, .npButton, .mute{
+.range, .play-pause, .song, .npButton, .mute {
     cursor: pointer;
 }
-.wrp{
+
+.wrp {
     width: 700px;
     margin: 0 auto;
     margin-top: 20px;
@@ -9,19 +10,22 @@
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
 }
-.player, .song{
+
+.player, .song {
     position: relative;
     width: 700px;
     height: 80px;
-    background: #181818 ;
+    background: #212529;
     border-radius: 5px 5px 0 0;
 }
-.play-pause, .play-pauseSn{
+
+.play-pause, .play-pauseSn {
     float: left;
     margin-left: 7px;
     font-size: 45px;
 }
-.nameSong, .settings, .nameSongSn, .nameAlbum{
+
+.nameSong, .settings, .nameSongSn, .nameAlbum, .deleteSong, .updateSong{
     position: absolute;
     color: white;
     padding: 5px;
@@ -29,28 +33,33 @@
     left: 340px;
     font-size: 20px;
 }
-.settings{
+
+.settings {
     left: 80px;
 }
-.settings div{
+
+.settings div {
     float: left;
     margin-right: 5px;
 }
-.mute, .volume{
+
+.mute, .volume {
     font-size: 20px;
     margin: 0 10px;
 }
-.bar{
+
+.bar {
     position: relative;
-    float:left;
+    float: left;
     width: 540px;
     height: 30px;
-    margin-top:25px;
+    margin-top: 25px;
     margin-left: 20px;
     padding: 0;
     overflow: hidden;
 }
-.setTime{
+
+.setTime {
     position: absolute;
     top: 0;
     background: yellow;
@@ -59,61 +68,100 @@
     padding: 3px;
     display: none;
 }
-.range, .progressSong, .load{
+
+.range, .progressSong, .load {
     height: 5px;
     margin: 25px 0;
     padding: 0;
     width: 100%;
 }
-.range{
+
+.range {
     background: lightgrey;
 }
-.progressSong, .load{
+
+.progressSong, .load {
     position: absolute;
-    top:0;
+    top: 0;
     left: -100%;
 }
-.progressSong{
-    background:  #0078d7;
+
+.progressSong {
+    background: #0078d7;
     z-index: 3;
 }
-.load{
+
+.load {
     background: gray;
 }
-.time, .durationSong{
+
+.time, .durationSong {
     float: left;
     font-size: 18px;
     margin: 25px 0 0 20px;
     color: white;
 }
-.song{
+
+.song {
     height: 45px;
-    background: #131318 ;
+    background: #212529;
     color: white;
     float: left;
     border-radius: 0;
 }
-.song:hover{
+
+.song:hover {
     opacity: 95%;
 }
-.play-pauseSn{
+
+.play-pauseSn {
     font-size: 25px;
     margin-top: 2px;
 }
+
 .nameSongSn, .nameAlbum, .durationSong{
     font-size: 14px;
 }
-.nameSongSn{
+.updateSong, .deleteSong{
+    font-size: 10px;
+}
+.nameSongSn {
     top: 5px;
     left: 90px;
 }
-.nameAlbum{
+
+.nameAlbum {
     top: 5px;
     left: 400px;
 }
 
-.durationSong{
+.updateSong {
+    top: 8px;
+    left: 530px;
+
+}
+.updateSong > a{
+    color: green;
+    text-decoration: none;
+}
+.deleteSong > a{
+    color: red;
+    text-decoration: none;
+}
+.deleteSong {
+    top: 8px;
+    left: 600px;
+}
+
+.durationSong {
     float: right;
     margin-top: 10px;
     margin-right: 10px;
+}
+.createSong{
+    padding-left: 45%;
+    background-color: #212529;
+}
+.createSong > a{
+    text-decoration: none;
 }
