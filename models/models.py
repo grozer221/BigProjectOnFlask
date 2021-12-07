@@ -3,6 +3,8 @@ from enum import Enum
 
 from flask_login import UserMixin
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from sqlalchemy import ForeignKey
+from sqlalchemy.orm import relationship
 
 from app import db, loginManager, app
 
@@ -47,6 +49,7 @@ class Album(db.Model):
     description = db.Column(db.Text, nullable=False)
     src = db.Column(db.Text, nullable=False)
     date = db.Column(db.Text, nullable=False)
+    songs = relationship('Song', backref='song', cascade="all,delete")
 
 
 class Song(db.Model):
@@ -54,3 +57,4 @@ class Song(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Text, nullable=False)
     url = db.Column(db.Text, nullable=False)
+    album_id = db.Column(db.Integer, ForeignKey('albums.id'))

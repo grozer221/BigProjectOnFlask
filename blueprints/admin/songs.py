@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, redirect, flash, url_for
 import os
 from werkzeug.utils import secure_filename
 from app import db, app
-from models.models import Song
+from models.models import Song, Album
 
 songs = Blueprint('songs', __name__, url_prefix="/admin/songs")
 
@@ -22,8 +22,8 @@ def allowed_format(filename):
 
 @songs.route('/')
 def index():
-    song = Song.query.order_by(Song.name).all()
-    return render_template('admin/songs/index.html', song=song)
+    relationship = db.session.query(Album, Song).join(Song, Album.id == Song.album_id).all()
+    return render_template('admin/songs/index.html', song=relationship)
 
 
 @songs.route('/create', methods=['POST', 'GET'])
@@ -35,7 +35,6 @@ def add_song():
                 return redirect(request.url)
 
             file = request.files['fileMusic']
-
             if file.filename == '':
                 flash('Ви не вибрали файл')
                 return redirect(request.url)
@@ -45,18 +44,44 @@ def add_song():
                 file.save(os.path.join(app.config['UPLOAD_FOLDER_MUSIC'], filename))
 
             name_song = request.form['nameSong']
-
-            sn = Song(name=name_song, url=filename)
+            selected_song = request.form['selectAlbum'];
+            sn = Song(name=name_song, url=filename, album_id=selected_song)
             db.session.add(sn)
             db.session.commit()
             return redirect('/admin/songs')
         except:
             db.session.rollback()
 
-    return render_template('admin/songs/create.html')
+    album = Album.query.all()
+    return render_template('admin/songs/create.html', album=album)
 
 
 @songs.route('/<int:id>')
 def view(id):
     song = Song.query.get(id)
     return render_template("admin/albums/details.html", song=song)
+
+
+@songs.route('/<int:id>/update', methods=['POST', 'GET'])
+def update_song(id):
+    song = Song.query.get(id)
+    if request.method == 'POST':
+        try:
+            name_song = request.form['nameSong']
+            db.session.query(Song).filter(Song.id == id).update({Song.name : name_song})
+            db.session.commit()
+            return redirect('/admin/songs')
+        except:
+            db.session.rollback()
+    return render_template("admin/songs/update.html", song=song)
+
+
+@songs.route('/<int:id>/delete')
+def delete_song(id):
+    song = Song.query.get_or_404(id)
+    try:
+        db.session.delete(song)
+        db.session.commit()
+        return redirect('/admin/songs')
+    except:
+        return "Error deleting song"

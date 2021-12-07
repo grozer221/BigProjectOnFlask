@@ -2,18 +2,33 @@
 
 
 {% block content %}
-    <h1>Додавання пісні</h1>
-    <div>
-        <form enctype="multipart/form-data" method="post">
-            <div class="mb-3">
-                <label for="nameSong" class="form-label">Назва пісні</label>
-                <input type="text" id="nameSong" class="form-control" placeholder="Вітер Вадіма " name="nameSong">
+    <div class="w-50 align-center">
+        <h1>Додавання пісні</h1>
+        {% if album| length > 0 %}
+            <div>
+                <form enctype="multipart/form-data" method="post">
+                    <div class="mb-3">
+                        <label for="nameSong" class="form-label">Назва пісні</label>
+                        <input type="text" id="nameSong" class="form-control" placeholder="Вітер Вадіма "
+                               name="nameSong">
+                    </div>
+                    <div class="mb-3">
+                        <label for="fileMusic" class="form-label"> Додайте файл</label>
+                        <input class="form-control" type="file" id="fileMusic" name="fileMusic">
+                    </div>
+                    <select class="form-select" aria-label="selectAlbum" name="selectAlbum" id="selectAlbum">
+                        <option selected disabled value="">Виберіть альбом</option>
+                        {% if album| length > 0 %}
+                            {% for ab in album %}
+                                <option value="{{ ab.id }}">{{ ab.name }}</option>
+                            {% endfor %}
+                        {% endif %}
+                    </select>
+                    <input class="btn btn-outline-dark" id="submit" name="submit" type="submit" value="Відправити">
+                </form>
             </div>
-            <div class="mb-3">
-                <label for="fileMusic" class="form-label"> Додайте файл</label>
-                <input class="form-control" type="file" id="fileMusic" name="fileMusic">
-            </div>
-            <input class="btn btn-outline-dark" id="submit" name="submit" type="submit" value="Відправити">
-        </form>
+        {% else %}
+            <p>Для початку створіть хоча б один альбом</p>
+        {% endif %}
     </div>
 {% endblock %}

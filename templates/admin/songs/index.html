@@ -2,13 +2,11 @@
 {% extends 'admin/layout.html' %}
 
 {% block content %}
-        {% if song|length > 0%}
-        <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/music.css') }}">
-        <script type="text/javascript" src="{{ url_for('static', filename='JavaScripts/music.js') }}" async></script>
-        <div class="wrp">
+    {% if song|length > 0 %}
+        <div class="wrp" >
             <div class="player">
                 <div class="play-pause" id="-1">▶</div>
-                <div class="nameSong">Name Song</div>
+                <div class="nameSong"></div>
                 <div class="settings">
                     <div class="npButton" id="prev" data-id="-1">◀</div>
                     <div class="npButton" id="next" data-id="-1">▶</div>
@@ -22,22 +20,28 @@
                         <div class="load"></div>
                     </div>
                 </div>
-                <div class="time">0:00</div>
+                <div class="time"></div>
             </div>
-           {% for sn in song %}
+            {% for sn in song %}
                 <div class="song" id="">
-                <div class="play-pauseSn">▶</div>
-                <div class="nameSongSn">{{ sn.name }}  <audio >
-                    <source src="/static/uploads/music/{{ sn.url }}">
-                </audio></div>
-                <div class="nameAlbum">Album</div>
-                <div class="durationSong">0:00</div>
-                <!-- Album -->
-            </div>
-           {% endfor %}
+                    <div class="play-pauseSn">▶</div>
+                    <div class="nameSongSn">{{ sn.Song.name }}
+                        <audio>
+                            <source src="/static/uploads/music/{{ sn.Song.url }}">
+                        </audio>
+                    </div>
+                    <div class="nameAlbum">{{ sn.Album.name }}</div>
+                    <div class="deleteSong"><a href="/admin/songs/{{sn.Song.id}}/delete">Видалити</a></div>
+                    <div class="updateSong"><a href="/admin/songs/{{sn.Song.id}}/update">Редагувати</a></div>
+                    <div class="durationSong"></div>
+                    <!-- Album -->
+                </div>
+            {% endfor %}
+         <div class="createSong">
+             <a href="create">Додати пісню</a>
+         </div>
         </div>
-        {% else %}
+    {% else %}
         <p>Пісні відсутні (не створені альбоми або не додано пісень до певного альбому)</p>
-        {% endif %}
-        <a href="create">Додати пісню</a>
+    {% endif %}
 {% endblock %}

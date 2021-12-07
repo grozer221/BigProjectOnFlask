@@ -28,7 +28,7 @@ window.onload = function () {
             } else {
                 time += parseInt(seconds % 60);
             }
-            listSongs[i].children[3].innerText = time;
+            listSongs[i].children[5].innerText = time;
         });
     }
 

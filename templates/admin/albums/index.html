@@ -4,24 +4,27 @@
 {% extends 'admin/layout.html' %}
 
 {% block content %}
-
-
-    <a href="create-album">Додати альбом</a>
-{#<h1>Усі альбоми на сайті</h1>#}
-
-    {% if album|length > 0%}
-
-        {%for el in album%}
-        <div>
-            <img src="/static/uploads/{{ el.src }}" alt="{{el.name}}">
-
-
-            <h2>{{el.name}}</h2>
-            <a href="/admin/albums/{{  el.id }}">Детальніше</a>
+    {% if album|length > 0 %}
+        <div class="albums_list_holder min_width">
+            <ul class="albums_list">
+                {% for el in album %}
+                    <li id="{{ el.id }}">
+                        <a class="album" href="/admin/albums/{{ el.id }}" title="{{ el.name }}">
+                         <span class="cover">
+                         <img class="colored" src="/static/uploads/{{ el.src }}" alt="{{ el.name }}">
+                         <img class="gs" src="/static/uploads/{{ el.src }}" alt="{{ el.name }}">
+                             <i class="new"></i>
+                         </span>
+                         <span class="title">{{ el.name }}</span>{{ el.date }} </a>
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
-        {%endfor%}
+        <div class="w-50 align-center"><a href="create-album">Додати альбом</a>
+        </div>
     {% else %}
-    <p>Ще немає статтей на сайті</p>
+        <p>Ще немає статтей на сайті</p>
     {% endif %}
+    {#<h1>Усі альбоми на сайті</h1>#}
 
 {% endblock %}
