@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template, request, redirect, flash, url_for
+from flask_login import login_required
 
 from app import db, app
+from decorators import authAdmin
 from models.models import Album, Song
 
 albums = Blueprint('albums', __name__, url_prefix="/admin/albums")
@@ -27,12 +29,14 @@ def allowed_file(filename):
 
 # all albums on one page
 @albums.route('/')
+@authAdmin
 def index():
     album = Album.query.order_by(Album.date.desc()).all()
     return render_template("admin/albums/index.html", album=album)
 
 
 @albums.route('/create-album', methods=['POST', 'GET'])
+@authAdmin
 def create_album():
     # POST:
     if request.method == 'POST':
@@ -86,12 +90,14 @@ def create_album():
 
 
 @albums.route('/<int:id>')
+@authAdmin
 def details(id):
     album = Album.query.get(id)
     return render_template("admin/albums/details.html", album=album)
 
 
 @albums.route('/<int:id>/del')
+@authAdmin
 def posts_del(id):
     album = Album.query.get_or_404(id)
     try:
@@ -103,6 +109,7 @@ def posts_del(id):
 
 
 @albums.route('/<int:id>/update', methods=['POST', 'GET'])
+@authAdmin
 def post_update(id):
     # Дістаємо з БД потрібний запис та утворюємо відповідний об'єкт
     album = Album.query.get(id)

@@ -1,7 +1,9 @@
 {% extends 'admin/layout.html' %}
 
 {% block content %}
-    {% if errorCode == 404 %}
+    {% if errorCode == 401 %}
+        <h1 class="mt-4">Помилка 401. Доступ заборонено</h1>
+    {% elif errorCode == 404 %}
         <h1 class="mt-4">Помилка 404. Сторінка не знайдена</h1>
     {% elif errorCode == 500 %}
         <h1 class="mt-4">Помилка 500. Server dead</h1>

@@ -8,7 +8,6 @@ from models.models import User, Role
 
 auth = Blueprint('auth', __name__, url_prefix="/admin/auth")
 
-
 @auth.get('/login')
 @auth.post('/login')
 def login():
@@ -63,7 +62,7 @@ def account():
         current_user.firstName = form.firstName.data
         current_user.lastName = form.lastName.data
         db.session.commit()
-        return redirect('/admin/auth/account')
+        return render_template('admin/auth/account.html', form=form, commonSuccess='Дані оновлено')
     elif request.method == 'GET':
         form.email.data = current_user.email
         form.firstName.data = current_user.firstName
