@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, redirect, flash, url_for
 import os
 from werkzeug.utils import secure_filename
 from app import db, app
+from decorators import authAdmin
 from models.models import Song, Album
 
 songs = Blueprint('songs', __name__, url_prefix="/admin/songs")
@@ -21,12 +22,14 @@ def allowed_format(filename):
 
 
 @songs.route('/')
+@authAdmin
 def index():
     relationship = db.session.query(Album, Song).join(Song, Album.id == Song.album_id).all()
     return render_template('admin/songs/index.html', song=relationship)
 
 
 @songs.route('/create', methods=['POST', 'GET'])
+@authAdmin
 def add_song():
     if request.method == 'POST':
         try:
@@ -57,12 +60,14 @@ def add_song():
 
 
 @songs.route('/<int:id>')
+@authAdmin
 def view(id):
     song = Song.query.get(id)
     return render_template("admin/albums/details.html", song=song)
 
 
 @songs.route('/<int:id>/update', methods=['POST', 'GET'])
+@authAdmin
 def update_song(id):
     song = Song.query.get(id)
     if request.method == 'POST':
@@ -77,6 +82,7 @@ def update_song(id):
 
 
 @songs.route('/<int:id>/delete')
+@authAdmin
 def delete_song(id):
     song = Song.query.get_or_404(id)
     try:

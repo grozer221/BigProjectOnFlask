@@ -48,7 +48,7 @@ form .btn {
     text-align: center;
 }
 
-.loginForm, .registerForm, .resetPasswordForm, .resetTokenForm {
+.loginForm, .registerForm, .resetPasswordForm, .resetTokenForm, .accountUpdateForm {
     width: 500px;
     position: absolute;
     top: 50%;

@@ -16,6 +16,9 @@
                 {% if commonError %}
                     <div class="form-group alert alert-danger">{{ commonError }}</div>
                 {% endif %}
+                {% if commonSuccess %}
+                    <div class="form-group alert alert-success">{{ commonSuccess }}</div>
+                {% endif %}
                 <div class="form-group">
                     {{ form.email.label(class="form-control-label") }}
                     {{ form.email(class="form-control") }}
