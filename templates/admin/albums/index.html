@@ -5,26 +5,42 @@
 
 {% block content %}
     {% if album|length > 0 %}
-        <div class="albums_list_holder min_width">
-            <ul class="albums_list">
-                {% for el in album %}
-                    <li id="{{ el.id }}">
-                        <a class="album" href="/admin/albums/{{ el.id }}" title="{{ el.name }}">
-                         <span class="cover">
-                         <img class="colored" src="/static/uploads/{{ el.src }}" alt="{{ el.name }}">
-                         <img class="gs" src="/static/uploads/{{ el.src }}" alt="{{ el.name }}">
-                             <i class="new"></i>
-                         </span>
-                         <span class="title">{{ el.name }}</span>{{ el.date }} </a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div class="w-50 align-center"><a href="create-album">Додати альбом</a>
-        </div>
+        <table class="album">
+            <tr>
+                <th>#</th>
+                <th>Картинка</th>
+                <th>Назва</th>
+                <th>Опис</th>
+                <th>Дата</th>
+                <th></th>
+            </tr>
+            {% for el in album %}
+                <tr>
+                    <td>{{ el.id }}</td>
+                    <td>
+                        <div class="wrapperImage">
+                            <img src="/static/uploads/{{ el.src }}" alt="" class="image">
+                        </div>
+                    </td>
+                    <td>
+                        <div>{{ el.name }}</div>
+                    </td>
+                    <td>
+                        <div>{{ el.description }}</div>
+                    </td>
+                    <td>
+                        <small class="text-muted">{{ el.date }}</small>
+                    </td>
+                    <td>
+                        <a href="/admin/albums/{{ el.id }}/update" class="updateAlbum">Редагувати</a>
+                        <a href="/admin/albums/{{ el.id }}/del" class="deleteAlbum">Видалити</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <a href="create-album">Додати альбом</a>
     {% else %}
         <p>Ще немає статтей на сайті</p>
+        <a href="create-album">Додати альбом</a>
     {% endif %}
-    {#<h1>Усі альбоми на сайті</h1>#}
-
 {% endblock %}

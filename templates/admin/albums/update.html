@@ -1,20 +1,37 @@
-
 {% extends 'admin/layout.html' %}
 
 
 {% block content %}
-<h1>Додавання альбому</h1>
-<form  enctype="multipart/form-data" method="post">
-    <label for="name"></label><input type="text" name="name" id="name" value="{{ album.name }}"><br>
-    <label for="description"></label><textarea name="description" id="description" >{{ album.description }}</textarea><br>
-    <label for="date"></label><input type="text" name="date" id="date"  value="{{ album.date }}"><br>
-
-    <img src="/static/uploads/{{ album.src }}" alt="{{ album.name }}"><br>
-    <label for="photo"></label><input type="file" name="photo" id="photo" multiple accept="image/*,image/jpeg"><br>
-
-{#    <label for="date"></label><input type="date" name="date" id="date" ><br>#}
-    <input type="submit" value="Оновити">
-
-</form>
+    <div class="w-50 align-center">
+        <h1>Редагування альбому {{ album.name }}</h1>
+        <div>
+            <form enctype="multipart/form-data" method="post">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Назва альбому</label>
+                    <input type="text" id="name" class="form-control" placeholder="Вітер весни" name="name">
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Інформація про альбом</label>
+                    <textarea class="form-control" id="description" name="description" style="resize: none">{{ album.description }}</textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Введіть дату створення альбому</label>
+                    <input type="date" id="date" class="form-control" placeholder="2003" name="date" value="{{ album.date }}">
+                </div>
+                <div class="mb-3">
+                    <div class="wrapperImage">
+                        <img src="/static/uploads/{{ album.src }}" alt="{{ album.name }}" class="image">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="file" class="form-label"> Додайте картинку</label>
+                    <input class="form-control" type="file" id="file" name="file">
+                </div>
+                <input class="btn btn-outline-dark" id="submit" name="submit" type="submit" value="Відправити">
+            </form>
+        </div>
+    </div>
 {% endblock %}
+
+
 

@@ -1,9 +1,8 @@
-from flask import Blueprint, render_template, request, redirect, flash, url_for
-from flask_login import login_required
+from flask import Blueprint, render_template, request, redirect, flash
 
 from app import db, app
 from decorators import authAdmin
-from models.models import Album, Song
+from models.models import Album
 
 albums = Blueprint('albums', __name__, url_prefix="/admin/albums")
 
@@ -103,6 +102,8 @@ def posts_del(id):
     try:
         db.session.delete(album)
         db.session.commit()
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '../../static/uploads/' + album.src)
+        os.remove(path)
         return redirect('/admin/albums')
     except:
         return "при видаленні альбому відбулась помилка"
@@ -135,7 +136,7 @@ def post_update(id):
 
                 # Робимо оновлення запису РАЗОМ З КАРТИНКОЮ
                 db.session.query(Album).filter(Album.id == id).update(
-                    {Album.name: name, Album.date: date, Album.description: description, Album.photo: filename})
+                    {Album.name: name, Album.date: date, Album.description: description, Album.src: filename})
 
             # Робимо оновлення запису БЕЗ КАРТИНКИ, лишається поточна
             else:

@@ -1,6 +1,8 @@
-from flask import Blueprint, render_template, request, redirect, flash, url_for
 import os
+
+from flask import Blueprint, render_template, request, redirect, flash
 from werkzeug.utils import secure_filename
+
 from app import db, app
 from decorators import authAdmin
 from models.models import Song, Album
@@ -88,6 +90,8 @@ def delete_song(id):
     try:
         db.session.delete(song)
         db.session.commit()
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '../../static/uploads/music' + song.url)
+        os.remove(path)
         return redirect('/admin/songs')
     except:
-        return "Error deleting song"
+        return redirect('/admin/songs')

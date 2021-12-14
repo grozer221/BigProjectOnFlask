@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="database.sqlite3" uuid="a34934a4-7868-4988-a915-407a5897543e">
-      <driver-ref>sqlite.xerial</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:D:\2 Курс\Мова програмування Python\Flask\BigProjectOnFlask\database.sqlite3</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-    <data-source source="LOCAL" name="database.sqlite3 [2]" uuid="2ca01ada-ffe7-4d9d-9270-2eb7c12cc4f0">
+    <data-source source="LOCAL" name="database.sqlite3" uuid="7eb0a40d-f2f0-42a2-a926-47f59ef3d5ca">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
