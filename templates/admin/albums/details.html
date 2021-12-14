@@ -1,18 +1,21 @@
-
 {% extends 'admin/layout.html' %}
 
 
 {% block content %}
 
-{#<h1>{{  article.title }}</h1>#}
-<div>
-    <h2>{{album.name}}</h2>
-    <p>{{album.description}}</p>
-    <img src="/static/uploads/{{ album.src }}" alt="{{ album.name }}">
+    {#<h1>{{  article.title }}</h1>#}
+    <div>
+        <h2>{{ album.name }}</h2>
+        <p>{{ album.description }}</p>
+        <img src="/static/uploads/{{ album.src }}" alt="{{ album.name }}">
 
-    <p><b>Дата:{{ album.date }}</b></p>
-    <a href="/admin/albums/{{  album.id }}/del">Видалити</a>
-    <a href="/admin/albums/{{  album.id }}/update">Редагувати</a>
-</div>
+        <p><b>Дата:{{ album.date }}</b></p>
+        <a href="/admin/albums/{{ album.id }}/del">
+            <button type="button" class="btn btn-danger">Видалити</button>
+        </a>
+        <a href="/admin/albums/{{ album.id }}/update">
+            <button type="button" class="btn btn-secondary">Редагувати</button>
+        </a>
+    </div>
 {% endblock %}
 

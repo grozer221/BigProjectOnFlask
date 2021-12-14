@@ -4,8 +4,8 @@ from flask import Blueprint, render_template, request, redirect, flash
 from werkzeug.utils import secure_filename
 
 from app import db, app
-from decorators import authAdmin
-from models.models import Song, Album
+from decorators import authAdmin, authModerator
+from models.models import Song, Album, Role
 
 songs = Blueprint('songs', __name__, url_prefix="/admin/songs")
 
@@ -24,14 +24,14 @@ def allowed_format(filename):
 
 
 @songs.route('/')
-@authAdmin
+@authModerator
 def index():
     relationship = db.session.query(Album, Song).join(Song, Album.id == Song.album_id).all()
-    return render_template('admin/songs/index.html', song=relationship)
+    return render_template('admin/songs/index.html', song=relationship, Role=Role)
 
 
 @songs.route('/create', methods=['POST', 'GET'])
-@authAdmin
+@authModerator
 def add_song():
     if request.method == 'POST':
         try:
@@ -58,18 +58,18 @@ def add_song():
             db.session.rollback()
 
     album = Album.query.all()
-    return render_template('admin/songs/create.html', album=album)
+    return render_template('admin/songs/create.html', album=album, Role=Role)
 
 
 @songs.route('/<int:id>')
-@authAdmin
+@authModerator
 def view(id):
     song = Song.query.get(id)
-    return render_template("admin/albums/details.html", song=song)
+    return render_template("admin/albums/details.html", song=song, Role=Role)
 
 
 @songs.route('/<int:id>/update', methods=['POST', 'GET'])
-@authAdmin
+@authModerator
 def update_song(id):
     song = Song.query.get(id)
     if request.method == 'POST':
@@ -80,11 +80,11 @@ def update_song(id):
             return redirect('/admin/songs')
         except:
             db.session.rollback()
-    return render_template("admin/songs/update.html", song=song)
+    return render_template("admin/songs/update.html", song=song, Role=Role)
 
 
 @songs.route('/<int:id>/delete')
-@authAdmin
+@authModerator
 def delete_song(id):
     song = Song.query.get_or_404(id)
     try:

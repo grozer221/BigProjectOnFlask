@@ -2,8 +2,11 @@
 {% extends 'admin/layout.html' %}
 
 {% block content %}
+    <a href="create">
+        <button type="button" class="btn btn-primary">Додати пісню</button>
+    </a>
     {% if song|length > 0 %}
-        <div class="wrp" >
+        <div class="wrp">
             <div class="player">
                 <div class="play-pause" id="-1">▶</div>
                 <div class="nameSong"></div>
@@ -31,20 +34,18 @@
                         </audio>
                     </div>
                     <div class="nameAlbum">{{ sn.Album.name }}</div>
-                    <div class="deleteSong"><a href="/admin/songs/{{sn.Song.id}}/delete">Видалити</a></div>
-                    <div class="updateSong"><a href="/admin/songs/{{sn.Song.id}}/update">Редагувати</a></div>
+                    <div class="deleteSong">
+                        <a href="/admin/songs/{{ sn.Song.id }}/delete">Видалити</a>
+                    </div>
+                    <div class="updateSong">
+                        <a href="/admin/songs/{{ sn.Song.id }}/update">Редагувати</a>
+                    </div>
                     <div class="durationSong"></div>
                     <!-- Album -->
                 </div>
             {% endfor %}
-         <div class="createSong">
-             <a href="create">Додати пісню</a>
-         </div>
         </div>
     {% else %}
-        <p>Пісні відсутні (не створені альбоми або не додано пісень до певного альбому)</p>
-         <div>
-             <a href="create">Додати пісню</a>
-         </div>
+        <p>Ще немає пісень на сайті</p>
     {% endif %}
 {% endblock %}

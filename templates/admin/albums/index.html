@@ -4,6 +4,9 @@
 {% extends 'admin/layout.html' %}
 
 {% block content %}
+    <a href="create-album">
+        <button type="button" class="btn btn-primary">Додати альбом</button>
+    </a>
     {% if album|length > 0 %}
         <table class="album">
             <tr>
@@ -32,15 +35,17 @@
                         <small class="text-muted">{{ el.date }}</small>
                     </td>
                     <td>
-                        <a href="/admin/albums/{{ el.id }}/update" class="updateAlbum">Редагувати</a>
-                        <a href="/admin/albums/{{ el.id }}/del" class="deleteAlbum">Видалити</a>
+                        <a href="/admin/albums/{{ el.id }}/update" class="updateAlbum">
+                            <button type="button" class="btn btn-secondary">Редагувати</button>
+                        </a>
+                        <a href="/admin/albums/{{ el.id }}/del" class="deleteAlbum">
+                            <button type="button" class="btn btn-danger">Видалити</button>
+                        </a>
                     </td>
                 </tr>
             {% endfor %}
         </table>
-        <a href="create-album">Додати альбом</a>
     {% else %}
-        <p>Ще немає статтей на сайті</p>
-        <a href="create-album">Додати альбом</a>
+        <p>Ще немає альбомів на сайті</p>
     {% endif %}
 {% endblock %}

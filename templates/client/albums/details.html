@@ -1,0 +1,16 @@
+{% extends 'client/layout.html' %}
+
+
+{% block content %}
+    <div class="detailsAlbum">
+        <div class="floatLeft">
+            <div class="wrapperImage">
+                <img src="/static/uploads/{{ album.src }}" alt="{{ album.name }}" class="image">
+            </div>
+        </div>
+        <h4>{{ album.name }}</h4>
+        <p>{{ album.description }}</p>
+        <small class="text-muted">{{ album.date }}</small>
+    </div>
+{% endblock %}
+

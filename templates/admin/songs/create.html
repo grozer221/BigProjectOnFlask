@@ -2,7 +2,7 @@
 
 
 {% block content %}
-    <div class="w-50 align-center">
+    <div class="songCreate">
         <h1>Додавання пісні</h1>
         {% if album| length > 0 %}
             <div>
@@ -16,15 +16,17 @@
                         <label for="fileMusic" class="form-label"> Додайте файл</label>
                         <input class="form-control" type="file" id="fileMusic" name="fileMusic">
                     </div>
-                    <select class="form-select" aria-label="selectAlbum" name="selectAlbum" id="selectAlbum">
-                        <option selected disabled value="">Виберіть альбом</option>
-                        {% if album| length > 0 %}
-                            {% for ab in album %}
-                                <option value="{{ ab.id }}">{{ ab.name }}</option>
-                            {% endfor %}
-                        {% endif %}
-                    </select>
-                    <input class="btn btn-outline-dark" id="submit" name="submit" type="submit" value="Відправити">
+                    <div class="mb-3">
+                        <select class="form-select" aria-label="selectAlbum" name="selectAlbum" id="selectAlbum">
+                            <option selected disabled value="">Виберіть альбом</option>
+                            {% if album| length > 0 %}
+                                {% for ab in album %}
+                                    <option value="{{ ab.id }}">{{ ab.name }}</option>
+                                {% endfor %}
+                            {% endif %}
+                        </select>
+                    </div>
+                    <button class="btn btn-outline-dark">Відправити</button>
                 </form>
             </div>
         {% else %}
