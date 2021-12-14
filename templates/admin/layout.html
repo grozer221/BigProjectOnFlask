@@ -16,17 +16,14 @@
 <div class="wrapper">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/admin">LOGO</a>
+            <a class="navbar-brand" href="/">ОКЕАН ЕЛЬЗИ <span class="badge bg-secondary">Admin</span></a>
             <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
                 <ul class="navbar-nav mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/admin">Головна</a>
+                        <a class="nav-link" href="/admin/albums">Альбоми</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/albums">Albums</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/admin/songs">Songs</a>
+                        <a class="nav-link" href="/admin/songs">Пісні</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav mb-2 mb-lg-0">
@@ -34,9 +31,11 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/">Для клієнтів</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/admin/users">Користувачі</a>
-                        </li>
+                        {% if current_user.role == Role.admin %}
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/admin/users">Користувачі</a>
+                            </li>
+                        {% endif %}
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/admin/auth/account">Аккаунт</a>
                         </li>

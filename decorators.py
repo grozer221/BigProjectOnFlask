@@ -23,7 +23,7 @@ def authModerator(function):
     def authModeratorWrapper(*args, **kwargs):
         try:
             print('moderator decorator!!', current_user.role, current_user.role)
-            if current_user.role == Role.admin or current_user.role == Role:
+            if current_user.role == Role.admin or current_user.role == Role.moderator:
                 return function(*args, **kwargs)
             return render_template('/admin/error.html', errorCode=403)
         except:

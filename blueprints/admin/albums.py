@@ -1,15 +1,13 @@
-from flask import Blueprint, render_template, request, redirect, flash, url_for
-from flask_login import login_required
+import os
+
+from flask import Blueprint, render_template, request, redirect, flash
+from werkzeug.utils import secure_filename
 
 from app import db, app
-from decorators import authAdmin, authModerator
-from models.models import Album, Song
+from decorators import authModerator
+from models.models import Album, Role
 
 albums = Blueprint('albums', __name__, url_prefix="/admin/albums")
-
-# Імпорт бібліотек для наступної роботи при завантаженні зображень з форми у папку проекту
-import os
-from werkzeug.utils import secure_filename
 
 # Папка, куди будуть збережені світлини
 UPLOAD_FOLDER = 'static/uploads'
@@ -32,7 +30,7 @@ def allowed_file(filename):
 @authModerator
 def index():
     album = Album.query.order_by(Album.date.desc()).all()
-    return render_template("admin/albums/index.html", album=album)
+    return render_template("admin/albums/index.html", album=album, Role=Role)
 
 
 @albums.route('/create-album', methods=['POST', 'GET'])
@@ -73,7 +71,7 @@ def create_album():
         except:
             db.session.rollback()
     # GET:
-    return render_template("admin/albums/create-album.html")
+    return render_template("admin/albums/create-album.html", Role=Role)
     # if request.method == "POST":
     #     name = request.form['name']
     #     description = request.form['description']
@@ -86,14 +84,14 @@ def create_album():
     #     except:
     #         return "Error"
     # else:
-    #     return render_template("admin/albums/create-album.html")
+    #     return render_template("admin/albums/create-album.html", Role=Role)
 
 
 @albums.route('/<int:id>')
 @authModerator
 def details(id):
     album = Album.query.get(id)
-    return render_template("admin/albums/details.html", album=album)
+    return render_template("admin/albums/details.html", album=album, Role=Role)
 
 
 @albums.route('/<int:id>/del')
@@ -103,6 +101,8 @@ def posts_del(id):
     try:
         db.session.delete(album)
         db.session.commit()
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '../../static/uploads/' + album.src)
+        os.remove(path)
         return redirect('/admin/albums')
     except:
         return "при видаленні альбому відбулась помилка"
@@ -135,7 +135,7 @@ def post_update(id):
 
                 # Робимо оновлення запису РАЗОМ З КАРТИНКОЮ
                 db.session.query(Album).filter(Album.id == id).update(
-                    {Album.name: name, Album.date: date, Album.description: description, Album.photo: filename})
+                    {Album.name: name, Album.date: date, Album.description: description, Album.src: filename})
 
             # Робимо оновлення запису БЕЗ КАРТИНКИ, лишається поточна
             else:
@@ -150,7 +150,7 @@ def post_update(id):
             db.session.rollback()
 
     # GET:
-    return render_template("admin/albums/update.html", album=album)
+    return render_template("admin/albums/update.html", album=album, Role=Role)
     # album = Album.query.get(id)
     # if request.method == "POST":
     #     album.name = request.form['name']
@@ -163,4 +163,4 @@ def post_update(id):
     #     except:
     #         return "при зміні альбому відбулась помилка"
     # else:
-    #     return render_template("admin/albums/update.html", album=album)
+    #     return render_template("admin/albums/update.html", album=album, Role=Role)

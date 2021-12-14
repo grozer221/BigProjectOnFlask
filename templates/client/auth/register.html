@@ -1,0 +1,73 @@
+{% extends 'admin/layout.html' %}
+
+{% block content %}
+    <div class="registerForm">
+        <h1>Реєстрація</h1>
+        <form action="" method="post">
+            {{ form.hidden_tag() }}
+            {% if commonError %}
+                <div class="form-group alert alert-danger">{{ commonError }}</div>
+            {% endif %}
+            <div class="form-group">
+                {{ form.email.label(class="form-control-label") }}
+                {% if form.email.errors %}
+                    {{ form.email(class="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.email.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.email(class="form-control") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.firstName.label(class="form-control-label") }}
+                {% if form.firstName.errors %}
+                    {{ form.firstName(class="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.firstName.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.firstName(class="form-control") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.lastName.label(class="form-control-label") }}
+                {% if form.lastName.errors %}
+                    {{ form.lastName(class="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.lastName.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.lastName(class="form-control") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.password.label(class="form-control-label") }}
+                {% if form.password.errors %}
+                    {{ form.password(class="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.password.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.password(class="form-control") }}
+                {% endif %}
+            </div>
+            <div class="mt-3 mb-3">
+                {{ form.submit(class="btn btn-outline-dark") }}
+            </div>
+        </form>
+        <div class="border-top pt-2">
+            <small class="text-muted">
+                Вже зареєстровані? <a class="ml-2" href="/admin/auth/login">Увійти</a>
+            </small>
+        </div>
+    </div>
+{% endblock %}

@@ -1,9 +1,11 @@
-from flask import Blueprint, render_template, request, redirect, flash, url_for
 import os
+
+from flask import Blueprint, render_template, request, redirect, flash
 from werkzeug.utils import secure_filename
+
 from app import db, app
 from decorators import authAdmin, authModerator
-from models.models import Song, Album
+from models.models import Song, Album, Role
 
 songs = Blueprint('songs', __name__, url_prefix="/admin/songs")
 
@@ -25,7 +27,7 @@ def allowed_format(filename):
 @authModerator
 def index():
     relationship = db.session.query(Album, Song).join(Song, Album.id == Song.album_id).all()
-    return render_template('admin/songs/index.html', song=relationship)
+    return render_template('admin/songs/index.html', song=relationship, Role=Role)
 
 
 @songs.route('/create', methods=['POST', 'GET'])
@@ -56,14 +58,14 @@ def add_song():
             db.session.rollback()
 
     album = Album.query.all()
-    return render_template('admin/songs/create.html', album=album)
+    return render_template('admin/songs/create.html', album=album, Role=Role)
 
 
 @songs.route('/<int:id>')
 @authModerator
 def view(id):
     song = Song.query.get(id)
-    return render_template("admin/albums/details.html", song=song)
+    return render_template("admin/albums/details.html", song=song, Role=Role)
 
 
 @songs.route('/<int:id>/update', methods=['POST', 'GET'])
@@ -78,7 +80,7 @@ def update_song(id):
             return redirect('/admin/songs')
         except:
             db.session.rollback()
-    return render_template("admin/songs/update.html", song=song)
+    return render_template("admin/songs/update.html", song=song, Role=Role)
 
 
 @songs.route('/<int:id>/delete')
@@ -88,6 +90,8 @@ def delete_song(id):
     try:
         db.session.delete(song)
         db.session.commit()
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '../../static/uploads/music' + song.url)
+        os.remove(path)
         return redirect('/admin/songs')
     except:
-        return "Error deleting song"
+        return redirect('/admin/songs')

@@ -53,6 +53,22 @@ window.onload = function () {
                 controls.children[4].innerText = parseInt(currTime / 60) + ':' + parseInt(currTime % 60);
             }
             controls.children[3].children[1].children[0].style.left = current + '%';
+            if (currTime == this.duration) {
+                allPause();
+                console.log(listSongs.length)
+                let nextSong = parseInt(id) + 1;
+                if (nextSong == listSongs.length) {
+                    playPauseSong(0);
+                    controls.children[2].children[1].dataset.id = 1;
+                    nextSong--;
+                    controls.children[2].children[0].dataset.id = -1;
+                } else {
+                    playPauseSong(nextSong);
+                    controls.children[2].children[1].dataset.id = nextSong;
+                    nextSong--;
+                    controls.children[2].children[0].dataset.id = nextSong;
+                }
+            }
         });
     }
 
@@ -165,22 +181,19 @@ window.onload = function () {
     });
     controls.children[3].children[1].addEventListener('mouseenter', function () {
         if (song) {
-            let id = controls.children[0].id;
-
-
+            let offsetLeft = this.offsetLeft;
+            let width = this.offsetWidth;
+            let dur = song.duration;
+            controls.children[3].children[1].addEventListener('mousemove', function (e) {
+                let x = (e.pageX) - offsetLeft;
+                let xproc = ((x * 100) / width) - 130;
+                let sec = ((xproc * dur) / 100);
+                controls.children[3].children[1].addEventListener('click', function () {
+                    song.currentTime = sec;
+                });
+            });
+        } else {
+            console.log('Select song');
         }
-    });
-    controls.children[3].children[1].addEventListener('click', function (e) {
-        let offset = this.offsetTop;
-        let duration = song.duration;
-        let width = screen.width;
-        let x = e.pageX - offset;
-        console.log(x);
-        let xproc = (x * 100) / width;
-        let sec = (xproc * duration);
-        sec = sec / 100;
-        xproc = xproc - 100;
-        controls.children[3].children[1].children[0].style.left = xproc + '%';
-        song.currentTime = sec;
     });
 }

@@ -36,11 +36,17 @@ from blueprints.admin.albums import albums
 from blueprints.admin.songs import songs
 from blueprints.admin.auth import auth
 from blueprints.admin.users import users
+from blueprints.client.albums import clientAlbums
+from blueprints.client.site import clientSite
+from blueprints.client.auth import clientAuth
 
 app.register_blueprint(albums, url_prefix='/admin/albums')
 app.register_blueprint(songs, url_prefix='/admin/songs')
 app.register_blueprint(auth, url_prefix='/admin/auth')
 app.register_blueprint(users, url_prefix='/admin/users')
+app.register_blueprint(clientAlbums, url_prefix='/albums')
+app.register_blueprint(clientSite, url_prefix='/')
+app.register_blueprint(clientAuth, url_prefix='/auth')
 
 
 @app.errorhandler(404)
