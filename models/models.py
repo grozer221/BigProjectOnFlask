@@ -1,4 +1,3 @@
-from datetime import datetime
 from enum import Enum
 
 from flask_login import UserMixin
@@ -11,6 +10,7 @@ from app import db, loginManager, app
 
 class Role(Enum):
     admin = 'admin'
+    moderator = 'moderator'
     user = 'user'
 
 

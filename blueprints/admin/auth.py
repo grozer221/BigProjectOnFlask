@@ -42,7 +42,7 @@ def register():
                     password=hashedPassword)
         db.session.add(user)
         db.session.commit()
-        return redirect('/admin/albums')
+        return redirect('/admin/auth/login')
     return render_template('admin/auth/register.html', form=form)
 
 

@@ -6,6 +6,7 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from flask_sqlalchemy import SQLAlchemy
 
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '34qu3qpibc4uit3q4u9gqesdkngfmi9w4hq'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.sqlite3'
@@ -34,10 +35,12 @@ db.create_all()
 from blueprints.admin.albums import albums
 from blueprints.admin.songs import songs
 from blueprints.admin.auth import auth
+from blueprints.admin.users import users
 
 app.register_blueprint(albums, url_prefix='/admin/albums')
 app.register_blueprint(songs, url_prefix='/admin/songs')
 app.register_blueprint(auth, url_prefix='/admin/auth')
+app.register_blueprint(users, url_prefix='/admin/users')
 
 
 @app.errorhandler(404)

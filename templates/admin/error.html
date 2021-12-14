@@ -2,7 +2,9 @@
 
 {% block content %}
     {% if errorCode == 401 %}
-        <h1 class="mt-4">Помилка 401. Доступ заборонено</h1>
+        <h1 class="mt-4">Помилка 401. Не автентифіковані</h1>
+    {% elif errorCode == 403 %}
+        <h1 class="mt-4">Помилка 403. Доступ заборонено</h1>
     {% elif errorCode == 404 %}
         <h1 class="mt-4">Помилка 404. Сторінка не знайдена</h1>
     {% elif errorCode == 500 %}

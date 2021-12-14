@@ -48,7 +48,7 @@ form .btn {
     text-align: center;
 }
 
-.loginForm, .registerForm, .resetPasswordForm, .resetTokenForm, .accountUpdateForm {
+.loginForm, .registerForm, .resetPasswordForm, .resetTokenForm, .accountUpdateForm, .users {
     width: 500px;
     position: absolute;
     top: 50%;
@@ -179,4 +179,17 @@ title{
     float: left;
     font-weight: 400;
     text-transform: none;
+}
+
+.users{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+}
+
+.card-body, .controls{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

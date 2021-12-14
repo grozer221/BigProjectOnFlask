@@ -1,0 +1,44 @@
+{% extends 'admin/layout.html' %}
+
+{% block content %}
+    <div class="users">
+        {% if users.count() > 0 %}
+            {% for user in users %}
+                <div class="card">
+                    <h5 class="card-header">{{ user.email }}</h5>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <span>{{ user.firstName }}</span>
+                            <span>{{ user.lastName }}</span>
+                        </h5>
+                        <div class="controls">
+                            <select class="form-select w-50" onchange="changeRole(this)" name="{{ user.id }}"
+                                    aria-label="Default select example">
+                                {% if user.role == Role.user %}
+                                    <option value="user" selected>user</option>
+                                {% else %}
+                                    <option value="user">user</option>
+                                {% endif %}
+                                {% if user.role == Role.moderator %}
+                                    <option value="moderator" selected>moderator</option>
+                                {% else %}
+                                    <option value="moderator">moderator</option>
+                                {% endif %}
+                                {% if user.role == Role.admin %}
+                                    <option value="admin" selected>admin</option>
+                                {% else %}
+                                    <option value="admin">admin</option>
+                                {% endif %}
+                            </select>
+                            <a href="/admin/users/delete/{{ user.id }}">
+                                <button type="button" class="btn btn-danger">Видалити</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div>Крім вас, користувачів немає</div>
+        {% endif %}
+    </div>
+{% endblock %}
