@@ -12,5 +12,44 @@
         <p>{{ album.description }}</p>
         <small class="text-muted">{{ album.date }}</small>
     </div>
+    <div class="detailsSong">
+    {% if song|length > 0 %}
+            <div class="wrp">
+                <div class="player">
+                    <div class="play-pause" id="-1">▶</div>
+                    <div class="nameSong"></div>
+                    <div class="settings">
+                        <div class="npButton" id="prev" data-id="-1">◀</div>
+                        <div class="npButton" id="next" data-id="-1">▶</div>
+                        <div class="mute">🔈</div>
+                        <input type="range" class="volume" min="0" max="100" value="20">
+                    </div>
+                    <div class="bar">
+                        <div class="setTime"></div>
+                        <div class="range">
+                            <div class="progressSong"></div>
+                            <div class="load"></div>
+                        </div>
+                    </div>
+                    <div class="time"></div>
+                </div>
+                {% for sn in song %}
+                    <div class="song" id="">
+                        <div class="play-pauseSn">▶</div>
+                        <div class="nameSongSn">{{ sn.name }}
+                            <audio>
+                                <source src="/static/uploads/music/{{ sn.url }}">
+                            </audio>
+                        </div>
+                        <div class="nameAlbum">{{ album.name }}</div>
+                        <div class="durationSong"></div>
+                        <!-- Album -->
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>Ще немає пісень в альбомі</p>
+        {% endif %}
+    </div>
 {% endblock %}
 

@@ -3,7 +3,7 @@ import os
 from flask import Blueprint, render_template, request, redirect, flash
 from werkzeug.utils import secure_filename
 
-from app import db, app
+from app import db, app, bcrypt
 from decorators import authAdmin, authModerator
 from models.models import Song, Album, Role
 
@@ -45,7 +45,8 @@ def add_song():
                 return redirect(request.url)
 
             if file and allowed_format(file.filename):
-                filename = secure_filename(file.filename)
+                hashed_file = bcrypt.generate_password_hash(file.filename).decode('utf-8')
+                filename = hashed_file + '_' + secure_filename(file.filename)
                 file.save(os.path.join(app.config['UPLOAD_FOLDER_MUSIC'], filename))
 
             name_song = request.form['nameSong']

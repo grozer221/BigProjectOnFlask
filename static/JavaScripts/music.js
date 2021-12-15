@@ -23,12 +23,13 @@ window.onload = function () {
         song.addEventListener('loadedmetadata', function () {
             let seconds = this.duration
             let time = parseInt(seconds / 60) + ':';
-            if (parseInt(seconds % 60) === 0) {
+            if (parseInt(seconds % 60) < 10) {
                 time += parseInt(seconds % 60) + '0';
             } else {
                 time += parseInt(seconds % 60);
             }
-            listSongs[i].children[5].innerText = time;
+            let durSong = document.querySelectorAll('.durationSong');
+            durSong[i].innerText = time;
         });
     }
 

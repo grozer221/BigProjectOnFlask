@@ -10,10 +10,10 @@ def authAdmin(function):
             print('admin decorator!!', current_user.role, current_user.role)
             if current_user.role == Role.admin:
                 return function(*args, **kwargs)
-            return render_template('/admin/error.html', errorCode=403)
+            return render_template('/admin/error.html', errorCode=403, Role=Role)
         except:
             print('moderator decorator!! except')
-            return render_template('/admin/error.html', errorCode=401)
+            return render_template('/admin/error.html', errorCode=401, Role=Role)
 
     authAdminWrapper.__name__ = function.__name__
     return authAdminWrapper
@@ -25,10 +25,10 @@ def authModerator(function):
             print('moderator decorator!!', current_user.role, current_user.role)
             if current_user.role == Role.admin or current_user.role == Role.moderator:
                 return function(*args, **kwargs)
-            return render_template('/admin/error.html', errorCode=403)
+            return render_template('/admin/error.html', errorCode=403, Role=Role)
         except:
             print('moderator decorator!! except')
-            return render_template('/admin/error.html', errorCode=401)
+            return render_template('/admin/error.html', errorCode=401, Role=Role)
 
     authModeratorWrapper.__name__ = function.__name__
     return authModeratorWrapper

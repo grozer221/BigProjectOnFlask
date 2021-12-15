@@ -3,7 +3,7 @@ import os
 from flask import Blueprint, render_template, request, redirect, flash
 from werkzeug.utils import secure_filename
 
-from app import db, app
+from app import db, app, bcrypt
 from decorators import authModerator
 from models.models import Album, Role
 
@@ -51,7 +51,8 @@ def create_album():
 
             # Якщо все ОК, то зберігаємо файл у папку uploads у нашому проекті
             if file and allowed_file(file.filename):
-                filename = secure_filename(file.filename)
+                hashed_file = bcrypt.generate_password_hash(file.filename).decode('utf-8')
+                filename = hashed_file + '_' +secure_filename(file.filename)
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
                 # Записуємо в окремі змінні назву та рік альбому
@@ -130,7 +131,8 @@ def post_update(id):
 
             # Якщо картинка правильна за розширенням та вона є
             if file and allowed_file(file.filename):
-                filename = secure_filename(file.filename)
+                hashed_file = bcrypt.generate_password_hash(file.filename).decode('utf-8')
+                filename = hashed_file + '_' + secure_filename(file.filename)
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
                 # Робимо оновлення запису РАЗОМ З КАРТИНКОЮ
