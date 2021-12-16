@@ -1,1 +1,1 @@
-worker: python app.pygi
+worker: python app.pygig
