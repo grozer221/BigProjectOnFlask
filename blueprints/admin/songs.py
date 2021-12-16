@@ -48,7 +48,6 @@ def add_song():
                 hashed_file = bcrypt.generate_password_hash(file.filename).decode('utf-8')
                 filename = hashed_file + '_' + secure_filename(file.filename)
                 file.save(os.path.join(app.config['UPLOAD_FOLDER_MUSIC'], filename))
-
             name_song = request.form['nameSong']
             selected_song = request.form['selectAlbum'];
             sn = Song(name=name_song, url=filename, album_id=selected_song)

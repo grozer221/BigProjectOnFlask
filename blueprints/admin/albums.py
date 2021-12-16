@@ -100,10 +100,10 @@ def details(id):
 def posts_del(id):
     album = Album.query.get_or_404(id)
     try:
-        db.session.delete(album)
-        db.session.commit()
         path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '../../static/uploads/' + album.src)
         os.remove(path)
+        db.session.delete(album)
+        db.session.commit()
         return redirect('/admin/albums')
     except:
         return "при видаленні альбому відбулась помилка"
